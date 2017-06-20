@@ -74,7 +74,7 @@ static NSInteger kBufforRows = 30; //Number of rows that are prevent by scroll p
     [super viewDidLoad];
     
     //Set deafult values for pickers
-    for (NSUInteger i = 0; i < 3; i++) {
+    for (NSUInteger i = 0; i < 1; i++) {
         [self.pickerView selectRow:[self defaultRowValueForComponent:i] inComponent:i animated:NO];
     }
     //Before call of this all parameters must be setted
@@ -110,12 +110,6 @@ static NSInteger kBufforRows = 30; //Number of rows that are prevent by scroll p
     //...but turn off gesture recognition on lower views
     gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:nil];
     [self.pickerBackgroundView addGestureRecognizer:gestureRecognizer];
-
-    //Set hours and minutes to selected values
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:self.date];
-    [self setPickerView:self.pickerView rowInComponent:HourPicker toIntagerValue:[components hour] decrementing:NO animated:NO];
-    [self setPickerView:self.pickerView rowInComponent:MinutePicker toIntagerValue:[components minute]  decrementing:NO animated:NO];
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -232,7 +226,7 @@ static NSInteger kBufforRows = 30; //Number of rows that are prevent by scroll p
 
 #pragma mark - UIPickerViewDataSource
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 3;
+    return 1;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
@@ -441,9 +435,7 @@ static NSInteger kBufforRows = 30; //Number of rows that are prevent by scroll p
 
 - (NSDate *)dateWithSelectedTime {
     NSDate *date = [self dateForRow:[self.pickerView selectedRowInComponent:DayPicker]];
-    NSInteger hour = [[self pickerView:self.pickerView attributedTitleForRow:[self.pickerView selectedRowInComponent:HourPicker] forComponent:HourPicker].string integerValue];
-    NSInteger minute = [[self pickerView:self.pickerView attributedTitleForRow:[self.pickerView selectedRowInComponent:MinutePicker] forComponent:MinutePicker].string integerValue];
-    return [[NSCalendar currentCalendar] dateBySettingHour:hour minute:minute second:0 ofDate:date options:0];
+    return date;
 }
 
 #pragma mark - Actions
