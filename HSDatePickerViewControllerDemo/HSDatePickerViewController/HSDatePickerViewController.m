@@ -141,11 +141,11 @@ static NSInteger kBufforRows = 30; //Number of rows that are prevent by scroll p
 }
 
 - (void)setMinDate:(NSDate *)minDate {
-    if ([minDate compare:self.date] == NSOrderedDescending) {
-        NSLog(@"minDate=%@ is after date=%@. Value will not be set.", minDate, self.date);
-    } else {
+//    if ([minDate compare:self.date] == NSOrderedDescending) {
+//        NSLog(@"minDate=%@ is after date=%@. Value will not be set.", minDate, self.date);
+//    } else {
         _minDate = minDate;
-    }
+//    }
 }
 
 - (NSDate *)minDate {
@@ -328,22 +328,22 @@ static NSInteger kBufforRows = 30; //Number of rows that are prevent by scroll p
         }
     }
     
-    NSInteger firstComponentRowValue = [pickerView selectedRowInComponent:DayPicker];
-    //If picker values are to close to bufforValue scroll it back
-    if (firstComponentRowValue <= self.minRowIndex) {
-        NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:self.minDate];
-        [self setPickerView:self.pickerView rowInComponent:HourPicker toIntagerValue:[components hour] decrementing:NO animated:YES];
-        if ([pickerView selectedRowInComponent:HourPicker] <= [self defaultRowValueForComponent:HourPicker] + [components hour]) {
-            [self setPickerView:self.pickerView rowInComponent:MinutePicker toIntagerValue:[components minute]  decrementing:NO animated:YES];
-        }
-    }
-    if (firstComponentRowValue >= self.maxRowIndex) {
-        NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:self.maxDate];
-        [self setPickerView:self.pickerView rowInComponent:HourPicker toIntagerValue:[components hour] decrementing:YES animated:YES];
-        if ([pickerView selectedRowInComponent:HourPicker] >= [self defaultRowValueForComponent:HourPicker] + [components hour]) {
-            [self setPickerView:self.pickerView rowInComponent:MinutePicker toIntagerValue:[components minute]  decrementing:YES animated:YES];
-        }
-    }
+//    NSInteger firstComponentRowValue = [pickerView selectedRowInComponent:DayPicker];
+//    //If picker values are to close to bufforValue scroll it back
+//    if (firstComponentRowValue <= self.minRowIndex) {
+//        NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:self.minDate];
+//        [self setPickerView:self.pickerView rowInComponent:HourPicker toIntagerValue:[components hour] decrementing:NO animated:YES];
+//        if ([pickerView selectedRowInComponent:HourPicker] <= [self defaultRowValueForComponent:HourPicker] + [components hour]) {
+//            [self setPickerView:self.pickerView rowInComponent:MinutePicker toIntagerValue:[components minute]  decrementing:NO animated:YES];
+//        }
+//    }
+//    if (firstComponentRowValue >= self.maxRowIndex) {
+//        NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:self.maxDate];
+//        [self setPickerView:self.pickerView rowInComponent:HourPicker toIntagerValue:[components hour] decrementing:YES animated:YES];
+//        if ([pickerView selectedRowInComponent:HourPicker] >= [self defaultRowValueForComponent:HourPicker] + [components hour]) {
+//            [self setPickerView:self.pickerView rowInComponent:MinutePicker toIntagerValue:[components minute]  decrementing:YES animated:YES];
+//        }
+//    }
 }
 
 - (void)setPickerView:(UIPickerView *)pickerView rowInComponent:(NSInteger)component toIntagerValue:(NSInteger)value decrementing:(BOOL)decrementing animated:(BOOL)animated {
